@@ -1,20 +1,49 @@
+// Comments will be stripped by prettier when the generator is used, but are left here for documentation
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
+    // Modules
+    "module": "es2020",
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+
+    // Emit
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
     "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2017", "dom"],
+
+    // Language and Environment
+    // If we're targeting node, this means shaky support for v12, but that's almost EOL.
+    // If we're targeting a browser, we'll be using a different transpiler like Vite to handle lower targets.
+    "target": "es2020",
+    "lib": ["es2020"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    // Projects
+    "composite": true,
+
+    // Completeness
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {}
+
+    // Interop Constraints
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Type Checking
+    // We'll basically make things as strict as possible, including letting typescript handle some things
+    // that eslint could technically do (but it will probably do better)
+    "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "exclude": ["node_modules", "tmp"]
 }
