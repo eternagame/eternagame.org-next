@@ -1,0 +1,589 @@
+openapi: 3.0.0
+servers:
+  - url: https://api.eternagame.org/v3
+    description: Production server (uses live data)
+  - url: https://api.eternadev.org/v3
+    description: Development server (uses snapshotted data)
+info:
+  description: API for the EternaGame.org site
+  version: 1.0.0
+  title: Eterna Next API
+  termsOfService: https://www.eternagame.org/terms/
+  contact:
+    email: dev@eternagame.org
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+  - name: Puzzles
+    description: API Endpoints related to puzzles
+paths: {}
+components:
+  schemas:
+    Puzzle:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+          maxLength: 64
+        description:
+          type: string
+        type:
+          type: string
+          enum:
+            - Challenge
+            - Experimental
+        created:
+          type: string
+          format: date-time
+        authorId:
+          type: integer
+          format: int64
+        coAuthorIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+        thumbnailUrl:
+          type: string
+          format: uri
+        specificationJournal:
+          type: array
+          items:
+            type: object
+            properties:
+              versionNumber: 
+                type: integer
+              created: 
+                type: string
+                format: date-time
+              specification:
+                type: object
+        reward:
+          type: integer
+          format: int64
+        commentIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+        draft:
+          type: boolean
+    Solution:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+          maxLength: 64
+        description:
+          type: string
+        created:
+          type: string
+          format: date-time
+        authorId:
+          type: integer
+          format: int64
+        puzzleId:
+          type: integer
+          format: int64
+        specification:
+          type: object
+    BlogPost:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        body:
+          type: string
+        thumbnailUrl:
+          type: string
+          format: uri
+        created:
+          type: string
+          format: date-time
+        authorId:
+          type: integer
+          format: int64
+        initiativeId:
+          type: integer
+          format: int64
+        category:
+          type: string
+          enum:
+            - Community
+            - Labs
+            - Miscellaneous
+            - Press
+            - Science
+            - Site
+            - Press
+        draft:
+          type: boolean
+    Comment:
+      type: object
+      properties:
+        authorId:
+          type: integer
+          format: int64
+        body:
+          type: string
+    MessageThread:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        participantIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+    Message:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        authorId:
+          type: integer
+          format: int64
+        threadId:
+          type: integer
+          format: int64
+        created:
+          type: string
+          format: date-time
+        body:
+          type: string
+    Publication:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        journal:
+          type: string
+        publicationDate:
+          type: string
+          format: date
+        link:
+          type: string
+          format: uri
+        pdfLink:
+          type: string
+          format: uri
+        reviewLink:
+          type: string
+          format: uri
+        playerAuthors:
+          type: boolean
+        authors:
+          type: string
+        thumbnailUrl:
+          type: string
+          format: uri
+        preprint:
+          type: boolean
+        abstract:
+          type: string
+    PuzzleCollection:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        description:
+          type: string
+        authorId:
+          type: integer
+          format: int64
+        created:
+          type: string
+          format: date-time
+        thumbnailUrl:
+          type: string
+          format: uri
+        puzzleIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+        draft:
+          type: boolean
+    Script:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        description:
+          type: string
+        authorId:
+          type: integer
+          format: int64
+        created:
+          type: string
+          format: date-time
+        public:
+          type: boolean
+        source:
+          type: string
+        inputs:
+          type: string
+    SoftwarePackage:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        description:
+          type: string
+        thumbnailUrl:
+          type: string
+          format: uri
+        publicationId:
+          type: integer
+          format: int64
+        license:
+          type: string
+        downloadTooltip:
+          type: string
+        downloadUrl:
+          type: string
+          format: uri
+        helpTooltip:
+          type: string
+        helpUrl:
+          type: string
+          format: uri
+        repository:
+          type: string
+        notificationEmails:
+          type: array
+          items:
+            type: string
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        event:
+          type: string
+        subscriberId:
+          type: integer
+          format: int64
+        subscriberEmail:
+          type: string
+          format: email
+        channelEmail:
+          type: boolean
+        channelApp:
+          type: boolean
+        channelPush:
+          type: boolean
+        channelEmailFrequency:
+          type: string
+          enum:
+            - Immediate
+            - Daily
+            - Weekly
+            - Monthly
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        created:
+          type: string
+          format: date-time
+        username:
+          type: string
+        personalName:
+          type: string
+        ssoId:
+          type: string
+          format: SSO id
+        avatarUrl:
+          type: string
+          format: url
+        roles:
+          type: array
+          items:
+            type: string
+            enum:
+              - Administrator
+              - Moderator
+              - Researcher
+        userEvents:
+          type: array
+          items: {}
+        certificatesPublic:
+          type: boolean
+        notificationsDefaultPush:
+          type: boolean
+        notificationsDefaultApp:
+          type: boolean
+        notificationsDefaultEmail:
+          type: boolean
+        notificationsEmailFrequency:
+          type: string
+          enum:
+            - Immediate
+            - Daily
+            - Weekly
+            - Monthly
+        achievements:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              level:
+                type: integer
+                format: int64
+        groups:
+          type: array
+          items:
+            type: integer
+            format: int64
+    UserGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        created:
+          type: string
+          format: date-time
+        founderId:
+          type: integer
+          format: int64
+        thumbnailUrl:
+          type: string
+          format: uri
+        private:
+          type: boolean
+        memberIds:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              admin:
+                type: boolean
+    LabProject:
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+        title:
+          type: string
+        created:
+          type: string
+          format: date-time
+        affiliations:
+          type: array
+          items:
+            type: string
+        bannerImage:
+          type: string
+          format: uri
+        adminIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+        initiativeId:
+          type: integer
+          format: int64
+        comments:
+          type: array
+          items:
+            type: object
+        draft:
+          type: boolean
+        adminUpdates:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            title:
+              type: string
+            body:
+              type: string
+            thumbnailUrl:
+              type: string
+              format: uri
+            created:
+              type: string
+              format: date-time
+            authorId:
+              type: integer
+              format: int64
+            draft:
+              type: boolean
+        puzzleIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+    Initiative:
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+        title:
+          type: string
+        created:
+          type: string
+          format: date-time
+        summary:
+          type: string
+        description:
+          type: string
+        coverImage:
+          type: string
+          format: uri
+        video:
+          type: string
+          format: uri
+        status:
+          type: string
+        affiliations:
+          type: array
+          items:
+            type: string
+        draft:
+          type: boolean
+    Experiment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        created:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [
+            "Accepting Submissions",
+            "Running Experiment",
+            "Analysis",
+            "Results Posted"
+          ]
+        submissionDeadline:
+          type: string
+          format: date-time
+        requestedSubmissionCount:
+          type: integer
+        puzzles:
+          type: array
+          items:
+            type: object
+            properties:
+              puzzleId:
+                type: integer
+                format: int64
+              numberOfSubmissionsAccepted:
+                type: integer
+              maxSubmissionsPerUser:
+                type: integer
+              maxVotesPerUser:
+                type: integer
+        votes:
+          type: array
+          items:
+            type: object
+            properties:
+              voterId:
+                type: integer
+              solutionId:
+                type: integer
+    ExperimentalDataField:
+      type: object
+      properties:
+        name:
+          type: string
+        dataType:
+          type: string
+          enum: [
+            "integer",
+            "float",
+            "string",
+            "uri",
+          ]
+    ExperimentalData:
+      type: object
+      properties:
+        # dataFieldId: 
+        #   type: integer #ref to experimentaldatafield
+        # experimentalConditions:
+        #   type: array
+        #   items:
+        #     type: integer #ref to experimentalconditiond
+        solutionId:
+          type: integer
+        experimentId: 
+          type: integer
+        data:
+          type: array #JSON blob
+          items:
+            type: object
+            properties:
+              dataFieldId:
+                type: integer
+              experimentalConditions:
+                type: array
+                items:
+                  type: integer
+              value: 
+                type: object #any
+    ExperimentalCondition:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: object #TODO: figure out type any? Could be integer, float, string, 
+    # xpEvent:
+    #   type: object
+    #   properties:
+    #     value:
+    #       type: integer
+    #       format: int64
+externalDocs:
+  description: Learn more about Eterna
+  url: http://www.eternagame.org
