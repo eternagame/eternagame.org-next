@@ -12,8 +12,8 @@ info:
   contact:
     email: dev@eternagame.org
   license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    name: BSD-3-Clause
+    url: https://opensource.org/licenses/BSD-3-Clause
 tags:
   - name: Puzzles
     description: API Endpoints related to puzzles
@@ -55,9 +55,9 @@ components:
           items:
             type: object
             properties:
-              versionNumber: 
+              versionNumber:
                 type: integer
-              created: 
+              created:
                 type: string
                 format: date-time
               specification:
@@ -399,7 +399,7 @@ components:
     LabProject:
       type: object
       properties:
-        id: 
+        id:
           type: integer
           format: int64
         title:
@@ -457,7 +457,7 @@ components:
     Initiative:
       type: object
       properties:
-        id: 
+        id:
           type: integer
           format: int64
         title:
@@ -498,12 +498,13 @@ components:
           format: date-time
         status:
           type: string
-          enum: [
-            "Accepting Submissions",
-            "Running Experiment",
-            "Analysis",
-            "Results Posted"
-          ]
+          enum:
+            [
+              'Accepting Submissions',
+              'Running Experiment',
+              'Analysis',
+              'Results Posted',
+            ]
         submissionDeadline:
           type: string
           format: date-time
@@ -539,16 +540,11 @@ components:
           type: string
         dataType:
           type: string
-          enum: [
-            "integer",
-            "float",
-            "string",
-            "uri",
-          ]
+          enum: ['integer', 'float', 'string', 'uri']
     ExperimentalData:
       type: object
       properties:
-        # dataFieldId: 
+        # dataFieldId:
         #   type: integer #ref to experimentaldatafield
         # experimentalConditions:
         #   type: array
@@ -556,7 +552,7 @@ components:
         #     type: integer #ref to experimentalconditiond
         solutionId:
           type: integer
-        experimentId: 
+        experimentId:
           type: integer
         data:
           type: array #JSON blob
@@ -569,7 +565,7 @@ components:
                 type: array
                 items:
                   type: integer
-              value: 
+              value:
                 type: object #any
     ExperimentalCondition:
       type: object
@@ -577,7 +573,7 @@ components:
         name:
           type: string
         value:
-          type: object #TODO: figure out type any? Could be integer, float, string, 
+          type: object #TODO: figure out type any? Could be integer, float, string,
     # xpEvent:
     #   type: object
     #   properties:
