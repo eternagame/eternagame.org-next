@@ -1,7 +1,7 @@
 {
   "name": "@eternagame/eternagame.org",
   "version": "0.0.0",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "scripts": {
     "_lint-workspace": "npx eslint --ignore-path .gitignore --ignore-pattern packages/",
     "lint-workspace": "npm run _lint-workspace .",
