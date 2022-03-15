@@ -12,7 +12,7 @@
     "@eternagame/eslint-plugin": "^1.1.0",
     "@eternagame/jest": "^1.1.0",
     "@eternagame/tsconfig": "^1.1.1",
-    "@eternagame/nx": "^1.5.0",
+    "@eternagame/nx": "^1.6.0",
     "@nrwl/cli": "13.8.3",
     "@nrwl/eslint-plugin-nx": "13.8.3",
     "@nrwl/tao": "13.8.3",
